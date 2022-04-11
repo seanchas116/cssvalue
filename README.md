@@ -12,6 +12,8 @@ import {
   Background,
   BackgroundLayer,
   URL,
+  Position,
+  Dimension,
   HexColor,
 } from "@seanchas116/cssvalue";
 
