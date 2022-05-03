@@ -23,7 +23,8 @@
   "scripts": {
     "lint": "eslint src",
     "test": "jest",
-    "build": "tsc -p tsconfig.build.json"
+    "build": "tsc -p tsconfig.build.json",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "bread-n-butter": "^0.6.0",
