@@ -1,13 +1,20 @@
-import { CurrentColor, HexColor, HSLColor, NamedColor, RGBColor } from "../types/Color";
+import {
+  CurrentColor,
+  HexColor,
+  HSLColor,
+  NamedColor,
+  RGBColor,
+} from "../types/Color";
 import { MacaronColor } from "../types/MacaronColor";
 import { color } from "./color";
+import { expect, describe, it } from "vitest";
 
 describe(RGBColor, () => {
   describe("toString", () => {
     it("returns rgb() format", () => {
-      expect(new RGBColor({ r: 100 / 255, g: 150 / 255, b: 200 / 255 }).toString()).toEqual(
-        "rgb(100,150,200)"
-      );
+      expect(
+        new RGBColor({ r: 100 / 255, g: 150 / 255, b: 200 / 255 }).toString()
+      ).toEqual("rgb(100,150,200)");
       expect(
         new RGBColor({
           r: 100 / 255,
@@ -23,10 +30,12 @@ describe(RGBColor, () => {
 describe(HSLColor, () => {
   describe("toString", () => {
     it("returns hsv() format", () => {
-      expect(new HSLColor({ h: 100 / 360, s: 0.4, l: 0.5 }).toString()).toEqual("hsl(100,40%,50%)");
-      expect(new HSLColor({ h: 100 / 360, s: 0.4, l: 0.5, a: 0.6 }).toString()).toEqual(
-        "hsla(100,40%,50%,0.6)"
+      expect(new HSLColor({ h: 100 / 360, s: 0.4, l: 0.5 }).toString()).toEqual(
+        "hsl(100,40%,50%)"
       );
+      expect(
+        new HSLColor({ h: 100 / 360, s: 0.4, l: 0.5, a: 0.6 }).toString()
+      ).toEqual("hsla(100,40%,50%,0.6)");
     });
   });
 });

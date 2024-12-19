@@ -2,6 +2,7 @@ import { HexColor, NamedColor, RGBColor } from "../types/Color";
 import { Border } from "../types/Border";
 import { Dimension } from "../types/Dimension";
 import { border, borderColor, borderStyle, borderWidth } from "./border";
+import { expect, describe, it } from "vitest";
 
 describe(Border, () => {
   describe("toString", () => {
@@ -47,7 +48,11 @@ describe("borderStyle", () => {
     expect(borderStyle.tryParse("none")).toEqual(["none"]);
     expect(borderStyle.tryParse("dotted")).toEqual(["dotted"]);
     expect(borderStyle.tryParse("dotted solid")).toEqual(["dotted", "solid"]);
-    expect(borderStyle.tryParse("hidden double dashed")).toEqual(["hidden", "double", "dashed"]);
+    expect(borderStyle.tryParse("hidden double dashed")).toEqual([
+      "hidden",
+      "double",
+      "dashed",
+    ]);
     expect(borderStyle.tryParse("none solid dotted dashed")).toEqual([
       "none",
       "solid",

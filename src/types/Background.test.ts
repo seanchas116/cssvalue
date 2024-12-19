@@ -1,5 +1,6 @@
 import { Background } from "./Background";
 import { HexColor } from "./Color";
+import { expect, describe, it } from "vitest";
 
 describe("Background", () => {
   describe("toString", () => {

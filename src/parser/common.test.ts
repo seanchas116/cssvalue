@@ -1,6 +1,7 @@
 import * as bnb from "bread-n-butter";
 import { doubleAmpersand, doubleBar, ident, maybeWhitespace } from "./common";
 import { length } from "./dimension";
+import { expect, describe, it } from "vitest";
 
 describe("ident", () => {
   it("parses CSS identifier", () => {

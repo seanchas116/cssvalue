@@ -1,6 +1,10 @@
 import { toBeDeepCloseTo, toMatchCloseTo } from "jest-matcher-deep-close-to";
 import { HexColor } from "./Color";
 import { ColorStop, interpolateStops } from "./Gradient";
+
+import { expect, describe, it } from "vitest";
+import { IterableObject } from "jest-matcher-deep-close-to/lib/types";
+
 expect.extend({ toBeDeepCloseTo, toMatchCloseTo });
 
 describe(interpolateStops, () => {
@@ -19,7 +23,7 @@ describe(interpolateStops, () => {
       [new HexColor("#000"), 0],
       [new HexColor("#111"), 0.5],
       [new HexColor("#222"), 1],
-    ]);
+    ] as IterableObject);
   });
   it("interpolates gradient stops", () => {
     const stops = [
@@ -52,6 +56,6 @@ describe(interpolateStops, () => {
       [new HexColor("#888"), 0.8],
       [new HexColor("#999"), 0.9],
       [new HexColor("#AAA"), 1],
-    ]);
+    ] as IterableObject);
   });
 });

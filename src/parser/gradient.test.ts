@@ -3,6 +3,7 @@ import { Dimension } from "../types/Dimension";
 import { ColorStop, LinearGradient, RadialGradient } from "../types/Gradient";
 import { Position } from "../types/Position";
 import { colorStop, linearGradient, radialGradient } from "./gradient";
+import { expect, describe, it } from "vitest";
 
 describe("colorStop", () => {
   it("parses color stop", () => {
@@ -19,7 +20,9 @@ describe("colorStop", () => {
 describe("linearGradient", () => {
   it("parsed linear-gradient()", () => {
     expect(
-      linearGradient.tryParse("linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%)")
+      linearGradient.tryParse(
+        "linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%)"
+      )
     ).toEqual(
       new LinearGradient({
         direction: "left",
@@ -33,11 +36,17 @@ describe("linearGradient", () => {
     );
     expect(
       linearGradient
-        .tryParse("linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%)")
+        .tryParse(
+          "linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%)"
+        )
         .toString()
     ).toEqual("linear-gradient(to left, #333, #333 50%, #eee 75%, #333 75%)");
 
-    expect(linearGradient.tryParse("linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c)")).toEqual(
+    expect(
+      linearGradient.tryParse(
+        "linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c)"
+      )
+    ).toEqual(
       new LinearGradient({
         direction: new Dimension(0.25, "turn"),
         stops: [
@@ -48,11 +57,15 @@ describe("linearGradient", () => {
       })
     );
     expect(
-      linearGradient.tryParse("linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c)").toString()
+      linearGradient
+        .tryParse("linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c)")
+        .toString()
     ).toEqual("linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c)");
 
     expect(
-      linearGradient.tryParse("linear-gradient(red, orange 10% 30%, yellow 50% 70%, green 90%)")
+      linearGradient.tryParse(
+        "linear-gradient(red, orange 10% 30%, yellow 50% 70%, green 90%)"
+      )
     ).toEqual(
       new LinearGradient({
         stops: [
@@ -73,9 +86,13 @@ describe("linearGradient", () => {
     );
     expect(
       linearGradient
-        .tryParse("linear-gradient(red, orange 10% 30%, yellow 50% 70%, green 90%)")
+        .tryParse(
+          "linear-gradient(red, orange 10% 30%, yellow 50% 70%, green 90%)"
+        )
         .toString()
-    ).toEqual("linear-gradient(red, orange 10% 30%, yellow 50% 70%, green 90%)");
+    ).toEqual(
+      "linear-gradient(red, orange 10% 30%, yellow 50% 70%, green 90%)"
+    );
 
     expect(
       linearGradient.tryParse(
@@ -106,7 +123,9 @@ describe("linearGradient", () => {
 describe("radialGradient", () => {
   it("parses radial-gradient", () => {
     expect(
-      radialGradient.tryParse("radial-gradient(5em circle at top left, yellow, blue) ")
+      radialGradient.tryParse(
+        "radial-gradient(5em circle at top left, yellow, blue) "
+      )
     ).toEqual(
       new RadialGradient({
         endingShape: "circle",
@@ -122,7 +141,9 @@ describe("radialGradient", () => {
       })
     );
     expect(
-      radialGradient.tryParse("radial-gradient(closest-side, #3f87a6, #ebf8e1, #f69d3c)")
+      radialGradient.tryParse(
+        "radial-gradient(closest-side, #3f87a6, #ebf8e1, #f69d3c)"
+      )
     ).toEqual(
       new RadialGradient({
         size: "closest-side",
@@ -141,7 +162,9 @@ describe("radialGradient", () => {
         ],
       })
     );
-    expect(radialGradient.tryParse("radial-gradient(10px, yellow, blue) ")).toEqual(
+    expect(
+      radialGradient.tryParse("radial-gradient(10px, yellow, blue) ")
+    ).toEqual(
       new RadialGradient({
         endingShape: "circle",
         size: [new Dimension(10, "px")],
@@ -151,7 +174,9 @@ describe("radialGradient", () => {
         ],
       })
     );
-    expect(radialGradient.tryParse("repeating-radial-gradient(yellow, blue) ")).toEqual(
+    expect(
+      radialGradient.tryParse("repeating-radial-gradient(yellow, blue) ")
+    ).toEqual(
       new RadialGradient({
         stops: [
           new ColorStop({ color: new NamedColor("yellow") }),

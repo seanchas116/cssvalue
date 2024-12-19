@@ -1,6 +1,7 @@
 import { Dimension } from "../types/Dimension";
 import { Position } from "../types/Position";
 import { position } from "./position";
+import { expect, describe, it } from "vitest";
 
 describe("position", () => {
   it("parses single keywords", () => {
@@ -45,7 +46,9 @@ describe("position", () => {
         { from: "bottom", offset: new Dimension(0, "") }
       )
     );
-    expect(position.tryParse("center center")).toEqual(new Position("center", "center"));
+    expect(position.tryParse("center center")).toEqual(
+      new Position("center", "center")
+    );
     expect(position.tryParse("bottom 10px right 20px")).toEqual(
       new Position(
         { from: "right", offset: new Dimension(20, "px") },

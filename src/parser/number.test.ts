@@ -1,4 +1,5 @@
 import { number } from "./number";
+import { expect, describe, it } from "vitest";
 
 describe("number", () => {
   it("parses CSS number", () => {

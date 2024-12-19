@@ -5,6 +5,7 @@ import { RadialGradient, ColorStop } from "../types/Gradient";
 import { Position } from "../types/Position";
 import { URL } from "../types/URL";
 import { background, bgPosition } from "./background";
+import { expect, describe, it } from "vitest";
 
 describe("bgPosition", () => {
   it("parses single background-position with 1 value", () => {
@@ -23,7 +24,9 @@ describe("bgPosition", () => {
         offset: new Dimension(0, ""),
       })
     );
-    expect(bgPosition.tryParse("center")).toEqual(new Position("center", "center"));
+    expect(bgPosition.tryParse("center")).toEqual(
+      new Position("center", "center")
+    );
   });
   it("parses single background-position with 2 values", () => {
     expect(bgPosition.tryParse("right bottom")).toEqual(
@@ -72,7 +75,9 @@ describe("background", () => {
     );
   });
   it("parses single layer", () => {
-    expect(background.tryParse("content-box radial-gradient(crimson, skyblue)")).toEqual(
+    expect(
+      background.tryParse("content-box radial-gradient(crimson, skyblue)")
+    ).toEqual(
       new Background({
         layers: [
           new BackgroundLayer({
@@ -90,7 +95,9 @@ describe("background", () => {
   });
   it("parses multiple layer", () => {
     expect(
-      background.tryParse('center / contain no-repeat url("foo.svg"), #eee 35% url("bar.png")')
+      background.tryParse(
+        'center / contain no-repeat url("foo.svg"), #eee 35% url("bar.png")'
+      )
     ).toEqual(
       new Background({
         layers: [
@@ -101,7 +108,10 @@ describe("background", () => {
             image: new URL("foo.svg"),
           }),
           new BackgroundLayer({
-            position: new Position({ from: "left", offset: new Dimension(35, "%") }, "center"),
+            position: new Position(
+              { from: "left", offset: new Dimension(35, "%") },
+              "center"
+            ),
             image: new URL("bar.png"),
           }),
         ],

@@ -1,5 +1,6 @@
 import { Dimension } from "./Dimension";
 import { Position } from "./Position";
+import { expect, describe, it } from "vitest";
 
 describe(Position, () => {
   describe("toString", () => {

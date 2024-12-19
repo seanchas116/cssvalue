@@ -3,7 +3,10 @@
  * @param target
  * @param partial
  */
-export function assignPartial<T>(target: T, partial: Partial<T>): void {
+export function assignPartial<T extends object>(
+  target: T,
+  partial: Partial<T>
+): void {
   for (const key of Object.keys(partial)) {
     const value = (partial as never)[key];
     if (value != null && key in target) {

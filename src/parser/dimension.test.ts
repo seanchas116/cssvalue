@@ -1,5 +1,6 @@
 import { Dimension } from "../types/Dimension";
 import { angle, length, percentage } from "./dimension";
+import { expect, describe, it } from "vitest";
 
 describe("length", () => {
   it("parses CSS length", () => {
