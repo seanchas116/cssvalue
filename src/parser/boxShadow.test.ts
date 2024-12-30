@@ -36,7 +36,7 @@ describe("singleBoxShadow", () => {
         blurRadius: new Dimension(0, ""),
         spreadRadius: new Dimension(0, ""),
         color: new NamedColor("red"),
-      })
+      }),
     );
   });
 });
@@ -61,7 +61,7 @@ describe("boxShadow", () => {
           spreadRadius: new Dimension(0, ""),
           color: new NamedColor("olive"),
         }),
-      ]
+      ],
     );
   });
   expect(boxShadow.tryParse("0 0 10px 0 #000000")).toEqual([

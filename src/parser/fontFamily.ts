@@ -6,7 +6,7 @@ import { string } from "./string";
 
 export const familyName = bnb.choice(
   ident.repeat(1).map((idents) => idents.join(" ")),
-  string
+  string,
 );
 
 export const fontFamily = familyName.sepBy(keyword(","));

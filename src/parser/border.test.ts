@@ -79,24 +79,24 @@ describe("border", () => {
         width: "medium",
         style: "dashed",
         color: new NamedColor("green"),
-      })
+      }),
     );
     expect(border.tryParse(" #f33 outset")).toEqual(
-      new Border({ style: "outset", color: new HexColor("#f33") })
+      new Border({ style: "outset", color: new HexColor("#f33") }),
     );
     expect(border.tryParse(" 0 #f33 outset ")).toEqual(
       new Border({
         width: new Dimension(0, ""),
         style: "outset",
         color: new HexColor("#f33"),
-      })
+      }),
     );
     expect(border.tryParse("solid 1px rgba(231,39,39,0.9)")).toEqual(
       new Border({
         width: new Dimension(1, "px"),
         style: "solid",
         color: new RGBColor({ r: 231 / 255, g: 39 / 255, b: 39 / 255, a: 0.9 }),
-      })
+      }),
     );
   });
 });

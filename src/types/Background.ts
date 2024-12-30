@@ -7,16 +7,22 @@ import { Position } from "./Position";
 import { URL } from "./URL";
 
 export const attachments = ["scroll", "fixed", "local"] as const;
-export type Attachment = typeof attachments[number];
+export type Attachment = (typeof attachments)[number];
 
 export const boxes = ["border-box", "padding-box", "content-box"] as const;
-export type Box = typeof boxes[number];
+export type Box = (typeof boxes)[number];
 
 export type Image = URL | Gradient;
 
-export type BackgroundSize = (Length | Percentage | ZeroDimension | "auto")[] | "cover" | "contain";
+export type BackgroundSize =
+  | (Length | Percentage | ZeroDimension | "auto")[]
+  | "cover"
+  | "contain";
 
-export type RepeatStyle = "repeat-x" | "repeat-y" | ("repeat" | "space" | "round" | "no-repeat")[];
+export type RepeatStyle =
+  | "repeat-x"
+  | "repeat-y"
+  | ("repeat" | "space" | "round" | "no-repeat")[];
 
 export class BackgroundLayer {
   constructor(opts: Partial<BackgroundLayer>) {
@@ -32,7 +38,7 @@ export class BackgroundLayer {
     {
       from: "top",
       offset: new Dimension(0, "%"),
-    }
+    },
   );
   size: BackgroundSize = ["auto", "auto"];
   repeatStyle: RepeatStyle = ["repeat"];
@@ -46,9 +52,12 @@ export class BackgroundLayer {
     }
 
     const imageString = this.image.toString();
-    const sizeString = typeof this.size === "string" ? this.size : this.size.join(" ");
+    const sizeString =
+      typeof this.size === "string" ? this.size : this.size.join(" ");
     const repeatString =
-      typeof this.repeatStyle === "string" ? this.repeatStyle : this.repeatStyle.join(" ");
+      typeof this.repeatStyle === "string"
+        ? this.repeatStyle
+        : this.repeatStyle.join(" ");
 
     let positionSizeString: string | undefined;
     if (this.position.toString() === "left top" && sizeString === "auto auto") {

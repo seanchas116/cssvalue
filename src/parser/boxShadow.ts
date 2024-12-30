@@ -13,7 +13,7 @@ export const singleBoxShadow: bnb.Parser<BoxShadow> = doubleAmpersand(
   },
   {
     inset: keyword("inset").map(() => true),
-  }
+  },
 ).map((result): BoxShadow => {
   return new BoxShadow({
     inset: !!result.inset,

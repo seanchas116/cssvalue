@@ -12,7 +12,7 @@ export type PositionY = {
 export class Position {
   constructor(
     public x: PositionX | "center" | undefined,
-    public y: PositionY | "center" | undefined
+    public y: PositionY | "center" | undefined,
   ) {}
 
   get computedX(): PositionX {

@@ -62,7 +62,7 @@ describe("doubleAmpersand", () => {
       },
       {
         baz: bnb.text("baz").trim(maybeWhitespace),
-      }
+      },
     );
     expect(parser.tryParse("baz foo 10px")).toEqual({
       foo: "foo",

@@ -12,7 +12,7 @@ const strEscape = bnb.choice(
   bnb.text("\\f").map(() => "\f"),
   bnb.text("\\r").map(() => "\r"),
   bnb.text("\\t").map(() => "\t"),
-  bnb.match(/\\./).map((str) => str.slice(1))
+  bnb.match(/\\./).map((str) => str.slice(1)),
 );
 
 const doubleStrChunk = bnb.match(/[^"\\]+/);

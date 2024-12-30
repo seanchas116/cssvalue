@@ -1,5 +1,8 @@
 export class Dimension<U extends string, N extends number = number> {
-  constructor(public readonly value: N, public readonly unit: U) {}
+  constructor(
+    public readonly value: N,
+    public readonly unit: U,
+  ) {}
   toString(): string {
     return `${this.value}${this.unit}`;
   }
@@ -26,14 +29,14 @@ export const lengthUnits = [
   "px",
 ] as const;
 
-export type LengthUnit = typeof lengthUnits[number];
+export type LengthUnit = (typeof lengthUnits)[number];
 export type Length = Dimension<LengthUnit>;
 
 export type Percentage = Dimension<"%">;
 
 export const angleUnits = ["deg", "grad", "rad", "turn"] as const;
 
-export type AngleUnit = typeof angleUnits[number];
+export type AngleUnit = (typeof angleUnits)[number];
 export type Angle = Dimension<AngleUnit>;
 
 export function angleToTurn(angle: Angle | ZeroDimension): number {

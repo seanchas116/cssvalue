@@ -34,19 +34,26 @@ export const linearGradientDirectionKeywords = [
   "left top",
 ] as const;
 
-export type LinearGradientDirectionKeyword = typeof linearGradientDirectionKeywords[number];
+export type LinearGradientDirectionKeyword =
+  (typeof linearGradientDirectionKeywords)[number];
 
 export class LinearGradient {
   constructor(opts: Partial<LinearGradient>) {
     assignPartial(this, opts);
   }
 
-  direction: Angle | ZeroDimension | LinearGradientDirectionKeyword | undefined = undefined; // bottom by default
+  direction:
+    | Angle
+    | ZeroDimension
+    | LinearGradientDirectionKeyword
+    | undefined = undefined; // bottom by default
   stops: ColorStop[] = [];
   repeating = false;
 
   toString(): string {
-    const name = this.repeating ? "repeating-linear-gradient" : "linear-gradient";
+    const name = this.repeating
+      ? "repeating-linear-gradient"
+      : "linear-gradient";
     const words: string[] = [];
     if (this.direction) {
       if (typeof this.direction === "string") {
@@ -65,13 +72,14 @@ export class RadialGradient {
   constructor(opts: Partial<RadialGradient>) {
     assignPartial(this, opts);
     this.endingShape =
-      opts.endingShape ?? (Array.isArray(opts.size) && opts.size.length === 1)
+      (opts.endingShape ?? (Array.isArray(opts.size) && opts.size.length === 1))
         ? "circle"
         : "ellipse";
   }
 
   endingShape: RadialGradientEndingShape;
-  size: RadialGradientSizeKeyword | (Length | Percentage | ZeroDimension)[] = "farthest-corner";
+  size: RadialGradientSizeKeyword | (Length | Percentage | ZeroDimension)[] =
+    "farthest-corner";
   position: Position = new Position("center", "center");
   stops: ColorStop[] = [];
   repeating = false;
@@ -81,7 +89,8 @@ export type Gradient = LinearGradient | RadialGradient;
 
 export const radialGradientEndingShapes = ["circle", "ellipse"] as const;
 
-export type RadialGradientEndingShape = typeof radialGradientEndingShapes[number];
+export type RadialGradientEndingShape =
+  (typeof radialGradientEndingShapes)[number];
 
 export const radialGradientSizeKeywords = [
   "closest-side",
@@ -90,24 +99,26 @@ export const radialGradientSizeKeywords = [
   "farthest-corner",
 ];
 
-export type RadialGradientSizeKeyword = typeof radialGradientSizeKeywords[number];
+export type RadialGradientSizeKeyword =
+  (typeof radialGradientSizeKeywords)[number];
 
-export function interpolateStops(originalStops: ColorStop[]): [Color, number][] {
-  const stops: [Color, number | undefined][] = originalStops.flatMap((stop): [
-    Color,
-    number | undefined
-  ][] => {
-    if (stop.position0 != null && stop.position1 != null) {
-      return [
-        [stop.color, stop.position0],
-        [stop.color, stop.position1],
-      ];
-    } else if (stop.position0 != null) {
-      return [[stop.color, stop.position0]];
-    } else {
-      return [[stop.color, undefined]];
-    }
-  });
+export function interpolateStops(
+  originalStops: ColorStop[],
+): [Color, number][] {
+  const stops: [Color, number | undefined][] = originalStops.flatMap(
+    (stop): [Color, number | undefined][] => {
+      if (stop.position0 != null && stop.position1 != null) {
+        return [
+          [stop.color, stop.position0],
+          [stop.color, stop.position1],
+        ];
+      } else if (stop.position0 != null) {
+        return [[stop.color, stop.position0]];
+      } else {
+        return [[stop.color, undefined]];
+      }
+    },
+  );
 
   const interpolated: [Color, number][] = [];
   let lastPos = 0;
@@ -138,7 +149,8 @@ export function interpolateStops(originalStops: ColorStop[]): [Color, number][] 
     for (let j = lastIndex + 1; j < stops.length; ++j) {
       interpolated[j] = [
         stops[j][0],
-        lastPos + (1 - lastPos) * ((j - lastIndex) / (stops.length - 1 - lastIndex)),
+        lastPos +
+          (1 - lastPos) * ((j - lastIndex) / (stops.length - 1 - lastIndex)),
       ];
     }
   } else {

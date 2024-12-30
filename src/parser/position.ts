@@ -20,15 +20,15 @@ export const position = bnb.choice(
         {
           from: y[0],
           offset: y[1],
-        }
-      )
+        },
+      ),
   ),
   bnb
     .all(
       keywords(["left", "center", "right"] as const).or(lengthPercentage),
       keywords(["top", "center", "bottom"] as const)
         .or(lengthPercentage)
-        .or(bnb.ok(undefined))
+        .or(bnb.ok(undefined)),
     )
     .map(([x, y]) => {
       let xValue: PositionX | "center";
@@ -62,13 +62,13 @@ export const position = bnb.choice(
         x == null
           ? undefined
           : x === "center"
-          ? "center"
-          : { from: x, offset: new Dimension(0, "") },
+            ? "center"
+            : { from: x, offset: new Dimension(0, "") },
         y == null
           ? undefined
           : y === "center"
-          ? "center"
-          : { from: y, offset: new Dimension(0, "") }
-      )
-  )
+            ? "center"
+            : { from: y, offset: new Dimension(0, "") },
+      ),
+  ),
 );

@@ -1,5 +1,9 @@
 import * as bnb from "bread-n-butter";
-import { borderWidthKeywords, borderStyleKeywords, Border } from "../types/Border";
+import {
+  borderWidthKeywords,
+  borderStyleKeywords,
+  Border,
+} from "../types/Border";
 import { color } from "./color";
 import { doubleBar, keywords, repeatToken } from "./common";
 import { length } from "./dimension";

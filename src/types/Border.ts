@@ -15,14 +15,15 @@ export const borderStyleKeywords = [
   "outset",
 ] as const;
 
-export type BorderStyle = typeof borderStyleKeywords[number];
+export type BorderStyle = (typeof borderStyleKeywords)[number];
 
 export class Border {
   constructor(opts: Partial<Border> = {}) {
     assignPartial(this, opts);
   }
 
-  width: Dimension<LengthUnit> | ZeroDimension | "thin" | "medium" | "thick" = "medium";
+  width: Dimension<LengthUnit> | ZeroDimension | "thin" | "medium" | "thick" =
+    "medium";
   style: BorderStyle | undefined = undefined;
   color: Color | undefined = undefined;
 

@@ -5,7 +5,7 @@
  */
 export function assignPartial<T extends object>(
   target: T,
-  partial: Partial<T>
+  partial: Partial<T>,
 ): void {
   for (const key of Object.keys(partial)) {
     const value = (partial as never)[key];

@@ -83,7 +83,13 @@ export class HSLColor {
   }
 }
 
-export type Color = HexColor | NamedColor | CurrentColor | RGBColor | HSLColor | MacaronColor;
+export type Color =
+  | HexColor
+  | NamedColor
+  | CurrentColor
+  | RGBColor
+  | HSLColor
+  | MacaronColor;
 
 export const colorNames = [
   "aliceblue",
@@ -238,4 +244,4 @@ export const colorNames = [
   "transparent",
 ] as const;
 
-export type ColorName = typeof colorNames[number];
+export type ColorName = (typeof colorNames)[number];

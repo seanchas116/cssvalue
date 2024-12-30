@@ -18,7 +18,7 @@ import {
 } from "@seanchas116/cssvalue";
 
 const background = cssParser.background.tryParse(
-  'center / contain no-repeat url("foo.svg"), #eee 35% url("bar.png")'
+  'center / contain no-repeat url("foo.svg"), #eee 35% url("bar.png")',
 );
 
 const expected = new Background({
@@ -32,7 +32,7 @@ const expected = new Background({
     new BackgroundLayer({
       position: new Position(
         { from: "left", offset: new Dimension(35, "%") },
-        "center"
+        "center",
       ),
       image: new URL("bar.png"),
     }),
