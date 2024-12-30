@@ -119,4 +119,76 @@ describe("background", () => {
       }),
     );
   });
+
+  it("parses multiple layer", () => {
+    expect(
+      background.tryParse(
+        "rgba(0, 0, 0, 0) linear-gradient(to right, rgb(255, 255, 255), rgb(199, 210, 254)) repeat scroll 0% 0% / auto padding-box text",
+      ),
+    ).toMatchInlineSnapshot(`
+      Background {
+        "color": RGBColor {
+          "a": 0,
+          "b": 0,
+          "g": 0,
+          "r": 0,
+        },
+        "layers": [
+          BackgroundLayer {
+            "attachment": "scroll",
+            "clip": "text",
+            "image": LinearGradient {
+              "direction": "right",
+              "repeating": false,
+              "stops": [
+                ColorStop {
+                  "color": RGBColor {
+                    "a": 1,
+                    "b": 1,
+                    "g": 1,
+                    "r": 1,
+                  },
+                  "position0": undefined,
+                  "position1": undefined,
+                },
+                ColorStop {
+                  "color": RGBColor {
+                    "a": 1,
+                    "b": 0.996078431372549,
+                    "g": 0.8235294117647058,
+                    "r": 0.7803921568627451,
+                  },
+                  "position0": undefined,
+                  "position1": undefined,
+                },
+              ],
+            },
+            "origin": "padding-box",
+            "position": Position {
+              "x": {
+                "from": "left",
+                "offset": Dimension {
+                  "unit": "%",
+                  "value": 0,
+                },
+              },
+              "y": {
+                "from": "top",
+                "offset": Dimension {
+                  "unit": "%",
+                  "value": 0,
+                },
+              },
+            },
+            "repeatStyle": [
+              "repeat",
+            ],
+            "size": [
+              "auto",
+            ],
+          },
+        ],
+      }
+    `);
+  });
 });

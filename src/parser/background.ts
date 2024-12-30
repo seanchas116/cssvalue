@@ -11,6 +11,8 @@ import {
   BackgroundLayer,
   Background,
   Image,
+  clipBoxes,
+  ClipBox,
 } from "../types/Background";
 import { Dimension } from "../types/Dimension";
 import { Position } from "../types/Position";
@@ -34,6 +36,8 @@ const attachment: bnb.Parser<Attachment> = keywords(attachments);
 // https://drafts.csswg.org/css-backgrounds-3/#typedef-box
 
 const box: bnb.Parser<Box> = keywords(boxes);
+
+const clipBox: bnb.Parser<ClipBox> = keywords(clipBoxes);
 
 // https://drafts.csswg.org/css-images-3/#typedef-image
 
@@ -155,7 +159,7 @@ export const bgLayer: bnb.Parser<BackgroundLayer> = doubleBar({
   repeatStyle: repeatStyle,
   attachment: attachment,
   origin: box,
-  clip: box,
+  clip: clipBox,
 }).map(({ image, positionSize, repeatStyle, attachment, origin, clip }) => {
   return new BackgroundLayer({
     image,
@@ -178,7 +182,7 @@ export const finalBgLayer: bnb.Parser<[BackgroundLayer[], Color?]> = doubleBar({
   repeatStyle: repeatStyle,
   attachment: attachment,
   box: box,
-  clipBox: box,
+  clipBox: clipBox,
 }).map(
   ({ color, image, positionSize, repeatStyle, attachment, box, clipBox }) => {
     if (

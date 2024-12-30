@@ -12,6 +12,9 @@ export type Attachment = (typeof attachments)[number];
 export const boxes = ["border-box", "padding-box", "content-box"] as const;
 export type Box = (typeof boxes)[number];
 
+export const clipBoxes = [...boxes, "text", "border-area"] as const;
+export type ClipBox = (typeof clipBoxes)[number];
+
 export type Image = URL | Gradient;
 
 export type BackgroundSize =
@@ -38,13 +41,13 @@ export class BackgroundLayer {
     {
       from: "top",
       offset: new Dimension(0, "%"),
-    },
+    }
   );
   size: BackgroundSize = ["auto", "auto"];
   repeatStyle: RepeatStyle = ["repeat"];
   attachment: Attachment = "scroll";
   origin: Box = "padding-box";
-  clip: Box = "border-box";
+  clip: ClipBox = "border-box";
 
   toString(): string {
     if (!this.image) {
