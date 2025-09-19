@@ -42,12 +42,14 @@ The codebase follows a parser combinator pattern using the `bread-n-butter` libr
 ## Testing
 
 Tests use Vitest and are located alongside source files as `*.test.ts`. Tests typically verify:
+
 - Parsing CSS strings into expected object structures
 - Serialization back to CSS strings
 - Round-trip parsing/serialization
 - Edge cases and invalid input handling
 
 Run a single test file:
+
 ```bash
 npm test -- src/parser/background.test.ts
 ```

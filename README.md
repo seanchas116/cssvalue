@@ -48,7 +48,7 @@ import {
 
 // Parse a complex background value
 const background = cssParser.background.tryParse(
-  'center / contain no-repeat url("foo.svg"), #eee 35% url("bar.png")'
+  'center / contain no-repeat url("foo.svg"), #eee 35% url("bar.png")',
 );
 
 // Work with strongly-typed objects
@@ -63,7 +63,7 @@ const expected = new Background({
     new BackgroundLayer({
       position: new Position(
         { from: "left", offset: new Dimension(35, "%") },
-        "center"
+        "center",
       ),
       image: new URL("bar.png"),
     }),
@@ -101,7 +101,7 @@ color.toString(); // => "rgb(255 128 0 / 0.5)"
 import { cssParser, LinearGradient } from "@seanchas116/cssvalue";
 
 const gradient = cssParser.gradient.tryParse(
-  "linear-gradient(45deg, red 0%, blue 50%, green 100%)"
+  "linear-gradient(45deg, red 0%, blue 50%, green 100%)",
 );
 
 // Modify gradient stops
@@ -120,7 +120,7 @@ import {
 } from "@seanchas116/cssvalue";
 
 const shadows = cssParser.boxShadow.tryParse(
-  "0 4px 6px rgba(0, 0, 0, 0.1), inset 0 2px 4px #00000020"
+  "0 4px 6px rgba(0, 0, 0, 0.1), inset 0 2px 4px #00000020",
 );
 
 // Create shadows programmatically

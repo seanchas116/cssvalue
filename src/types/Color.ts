@@ -229,7 +229,13 @@ export class OKLCHColor {
 }
 
 export class ColorFunction {
-  constructor(opts: { space: string; c1: number; c2: number; c3: number; a?: number }) {
+  constructor(opts: {
+    space: string;
+    c1: number;
+    c2: number;
+    c3: number;
+    a?: number;
+  }) {
     this.space = opts.space;
     this.c1 = opts.c1;
     this.c2 = opts.c2;

@@ -150,16 +150,18 @@ function buildOKLCH([l, c, h, a]: [
 ]) {
   return new OKLCHColor({
     l: l.value / 100,
-    c: c.unit === "%" ? c.value / 100 * 0.4 : c.value,
+    c: c.unit === "%" ? (c.value / 100) * 0.4 : c.value,
     h: h.unit === "" ? h.value / 360 : angleToTurn(h),
     a: a != null ? (a.unit === "%" ? a.value / 100 : a.value) : 1,
   });
 }
 
-const chromaValue = bnb.choice(
-  percentageOnly,
-  number.map((n) => new Dimension(n, "")),
-).trim(maybeWhitespace);
+const chromaValue = bnb
+  .choice(
+    percentageOnly,
+    number.map((n) => new Dimension(n, "")),
+  )
+  .trim(maybeWhitespace);
 
 const oklchSlash = slashColor(
   bnb.match(/oklch/i),
@@ -189,10 +191,12 @@ const hwbSlash = slashColor(
   percentage,
 ).map(buildHWB);
 
-const labValue = bnb.choice(
-  percentageOnly,
-  number.map((n) => new Dimension(n, "")),
-).trim(maybeWhitespace);
+const labValue = bnb
+  .choice(
+    percentageOnly,
+    number.map((n) => new Dimension(n, "")),
+  )
+  .trim(maybeWhitespace);
 
 function buildLAB([l, a, b, alpha]: [
   Percentage | Dimension<"">,
@@ -204,7 +208,12 @@ function buildLAB([l, a, b, alpha]: [
     l: l.unit === "%" ? l.value : l.value,
     a: a.unit === "%" ? a.value * 1.25 : a.value,
     b: b.unit === "%" ? b.value * 1.25 : b.value,
-    alpha: alpha != null ? (alpha.unit === "%" ? alpha.value / 100 : alpha.value) : 1,
+    alpha:
+      alpha != null
+        ? alpha.unit === "%"
+          ? alpha.value / 100
+          : alpha.value
+        : 1,
   });
 }
 
@@ -225,7 +234,12 @@ function buildOKLAB([l, a, b, alpha]: [
     l: l.unit === "%" ? l.value / 100 : l.value,
     a: a.unit === "%" ? a.value * 0.004 : a.value,
     b: b.unit === "%" ? b.value * 0.004 : b.value,
-    alpha: alpha != null ? (alpha.unit === "%" ? alpha.value / 100 : alpha.value) : 1,
+    alpha:
+      alpha != null
+        ? alpha.unit === "%"
+          ? alpha.value / 100
+          : alpha.value
+        : 1,
   });
 }
 
@@ -276,7 +290,11 @@ function buildColorFunction([space, c1, c2, c3, a]: [
   });
 }
 
-const colorSpaceId = bnb.match(/srgb-linear|srgb|display-p3|a98-rgb|prophoto-rgb|rec2020|xyz-d50|xyz-d65|xyz/).trim(maybeWhitespace);
+const colorSpaceId = bnb
+  .match(
+    /srgb-linear|srgb|display-p3|a98-rgb|prophoto-rgb|rec2020|xyz-d50|xyz-d65|xyz/,
+  )
+  .trim(maybeWhitespace);
 
 const colorFunctionSlash = bnb
   .all(

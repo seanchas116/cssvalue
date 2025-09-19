@@ -24,7 +24,8 @@
     "lint": "eslint src",
     "test": "vitest run",
     "build": "tsc -p tsconfig.build.json",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "bread-n-butter": "^0.6.0",

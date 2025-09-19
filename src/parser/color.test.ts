@@ -101,11 +101,16 @@ describe(LCHColor, () => {
 describe(OKLCHColor, () => {
   describe("toString", () => {
     it("returns oklch() format", () => {
-      expect(new OKLCHColor({ l: 0.401, c: 0.123, h: 21.57 / 360 }).toString()).toEqual(
-        "oklch(40.1% 0.123 21.57)",
-      );
       expect(
-        new OKLCHColor({ l: 0.5969, c: 0.156, h: 49.77 / 360, a: 0.5 }).toString(),
+        new OKLCHColor({ l: 0.401, c: 0.123, h: 21.57 / 360 }).toString(),
+      ).toEqual("oklch(40.1% 0.123 21.57)");
+      expect(
+        new OKLCHColor({
+          l: 0.5969,
+          c: 0.156,
+          h: 49.77 / 360,
+          a: 0.5,
+        }).toString(),
       ).toEqual("oklch(59.7% 0.156 49.77 / 0.5)");
     });
   });
@@ -114,11 +119,22 @@ describe(OKLCHColor, () => {
 describe(ColorFunction, () => {
   describe("toString", () => {
     it("returns color() format", () => {
-      expect(new ColorFunction({ space: "display-p3", c1: 1, c2: 0.5, c3: 0 }).toString()).toEqual(
-        "color(display-p3 1 0.5 0)",
-      );
       expect(
-        new ColorFunction({ space: "srgb", c1: 0.5, c2: 0.2, c3: 0.7, a: 0.8 }).toString(),
+        new ColorFunction({
+          space: "display-p3",
+          c1: 1,
+          c2: 0.5,
+          c3: 0,
+        }).toString(),
+      ).toEqual("color(display-p3 1 0.5 0)");
+      expect(
+        new ColorFunction({
+          space: "srgb",
+          c1: 0.5,
+          c2: 0.2,
+          c3: 0.7,
+          a: 0.8,
+        }).toString(),
       ).toEqual("color(srgb 0.5 0.2 0.7 / 0.8)");
     });
   });
@@ -303,7 +319,13 @@ describe("color", () => {
       new ColorFunction({ space: "xyz", c1: 0.5, c2: 0.5, c3: 0.5 }),
     );
     expect(color.tryParse("color(xyz-d50 25% 50% 75% / 0.1)")).toEqual(
-      new ColorFunction({ space: "xyz-d50", c1: 0.25, c2: 0.5, c3: 0.75, a: 0.1 }),
+      new ColorFunction({
+        space: "xyz-d50",
+        c1: 0.25,
+        c2: 0.5,
+        c3: 0.75,
+        a: 0.1,
+      }),
     );
   });
 });

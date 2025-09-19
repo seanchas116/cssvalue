@@ -41,7 +41,7 @@ export class BackgroundLayer {
     {
       from: "top",
       offset: new Dimension(0, "%"),
-    }
+    },
   );
   size: BackgroundSize = ["auto", "auto"];
   repeatStyle: RepeatStyle = ["repeat"];
