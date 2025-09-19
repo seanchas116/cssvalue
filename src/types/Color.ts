@@ -83,12 +83,42 @@ export class HSLColor {
   }
 }
 
+export class OKLCHColor {
+  constructor(opts: { l: number; c: number; h: number; a?: number }) {
+    this.l = opts.l;
+    this.c = opts.c;
+    this.h = opts.h;
+    this.a = opts.a ?? 1;
+  }
+
+  l: number;
+  c: number;
+  h: number;
+  a: number;
+
+  toString(): string {
+    const l = `${Math.round(this.l * 1000) / 10}%`;
+    const c = Math.round(this.c * 1000) / 1000;
+    const h = Math.round(this.h * 360 * 100) / 100;
+
+    if (this.a === 1) {
+      return `oklch(${l} ${c} ${h})`;
+    }
+    return `oklch(${l} ${c} ${h} / ${this.a})`;
+  }
+
+  clone(): OKLCHColor {
+    return new OKLCHColor(this);
+  }
+}
+
 export type Color =
   | HexColor
   | NamedColor
   | CurrentColor
   | RGBColor
   | HSLColor
+  | OKLCHColor
   | MacaronColor;
 
 export const colorNames = [

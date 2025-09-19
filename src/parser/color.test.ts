@@ -4,6 +4,7 @@ import {
   HSLColor,
   NamedColor,
   RGBColor,
+  OKLCHColor,
 } from "../types/Color";
 import { MacaronColor } from "../types/MacaronColor";
 import { color } from "./color";
@@ -36,6 +37,19 @@ describe(HSLColor, () => {
       expect(
         new HSLColor({ h: 100 / 360, s: 0.4, l: 0.5, a: 0.6 }).toString(),
       ).toEqual("hsla(100,40%,50%,0.6)");
+    });
+  });
+});
+
+describe(OKLCHColor, () => {
+  describe("toString", () => {
+    it("returns oklch() format", () => {
+      expect(new OKLCHColor({ l: 0.401, c: 0.123, h: 21.57 / 360 }).toString()).toEqual(
+        "oklch(40.1% 0.123 21.57)",
+      );
+      expect(
+        new OKLCHColor({ l: 0.5969, c: 0.156, h: 49.77 / 360, a: 0.5 }).toString(),
+      ).toEqual("oklch(59.7% 0.156 49.77 / 0.5)");
     });
   });
 });
@@ -90,6 +104,20 @@ describe("color", () => {
   it("parses macaron-color", () => {
     expect(color.tryParse(`macaron-color("someVariable")`)).toEqual(
       new MacaronColor("someVariable"),
+    );
+  });
+  it("parses oklch", () => {
+    expect(color.tryParse("oklch(40.1% 0.123 21.57)")).toEqual(
+      new OKLCHColor({ l: 0.401, c: 0.123, h: 21.57 / 360 }),
+    );
+    expect(color.tryParse("oklch(59.69% 0.156 49.77 / 0.5)")).toEqual(
+      new OKLCHColor({ l: 0.5969, c: 0.156, h: 49.77 / 360, a: 0.5 }),
+    );
+    expect(color.tryParse("oklch(70% 0.2 120deg)")).toEqual(
+      new OKLCHColor({ l: 0.7, c: 0.2, h: 120 / 360 }),
+    );
+    expect(color.tryParse("oklch(50% 50% 180)")).toEqual(
+      new OKLCHColor({ l: 0.5, c: 0.2, h: 180 / 360 }),
     );
   });
 });

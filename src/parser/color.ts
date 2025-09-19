@@ -7,6 +7,7 @@ import {
   HSLColor,
   NamedColor,
   RGBColor,
+  OKLCHColor,
 } from "../types/Color";
 import {
   Dimension,
@@ -136,6 +137,32 @@ const hslSlash = slashColor(
   percentage,
 ).map(buildHSL);
 
+function buildOKLCH([l, c, h, a]: [
+  Percentage | ZeroDimension,
+  Dimension<""> | Percentage | ZeroDimension,
+  Angle | Dimension<"">,
+  Percentage | Dimension<""> | undefined,
+]) {
+  return new OKLCHColor({
+    l: l.value / 100,
+    c: c.unit === "%" ? c.value / 100 * 0.4 : c.value,
+    h: h.unit === "" ? h.value / 360 : angleToTurn(h),
+    a: a != null ? (a.unit === "%" ? a.value / 100 : a.value) : 1,
+  });
+}
+
+const chromaValue = bnb.choice(
+  percentageOnly,
+  number.map((n) => new Dimension(n, "")),
+).trim(maybeWhitespace);
+
+const oklchSlash = slashColor(
+  bnb.match(/oklch/i),
+  percentage,
+  chromaValue,
+  angleOrNumber,
+).map(buildOKLCH);
+
 export const color: bnb.Parser<Color> = bnb.choice(
   hexColor,
   namedColor,
@@ -144,5 +171,6 @@ export const color: bnb.Parser<Color> = bnb.choice(
   rgbSlash,
   hslComma,
   hslSlash,
+  oklchSlash,
   macaronColor,
 );
