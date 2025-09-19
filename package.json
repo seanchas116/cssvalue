@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "lint": "eslint src",
-    "test": "vitest",
+    "test": "vitest run",
     "build": "tsc -p tsconfig.build.json",
     "prepare": "npm run build"
   },
