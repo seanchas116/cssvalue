@@ -83,6 +83,122 @@ export class HSLColor {
   }
 }
 
+export class HWBColor {
+  constructor(opts: { h: number; w: number; b: number; a?: number }) {
+    this.h = opts.h;
+    this.w = opts.w;
+    this.b = opts.b;
+    this.a = opts.a ?? 1;
+  }
+
+  h: number;
+  w: number;
+  b: number;
+  a: number;
+
+  toString(): string {
+    const h = Math.round(this.h * 360);
+    const w = Math.round(this.w * 100);
+    const b = Math.round(this.b * 100);
+
+    if (this.a === 1) {
+      return `hwb(${h} ${w}% ${b}%)`;
+    }
+    return `hwb(${h} ${w}% ${b}% / ${this.a})`;
+  }
+
+  clone(): HWBColor {
+    return new HWBColor(this);
+  }
+}
+
+export class LABColor {
+  constructor(opts: { l: number; a: number; b: number; alpha?: number }) {
+    this.l = opts.l;
+    this.a = opts.a;
+    this.b = opts.b;
+    this.alpha = opts.alpha ?? 1;
+  }
+
+  l: number;
+  a: number;
+  b: number;
+  alpha: number;
+
+  toString(): string {
+    const l = Math.round(this.l * 10) / 10;
+    const a = Math.round(this.a * 10) / 10;
+    const b = Math.round(this.b * 10) / 10;
+
+    if (this.alpha === 1) {
+      return `lab(${l}% ${a} ${b})`;
+    }
+    return `lab(${l}% ${a} ${b} / ${this.alpha})`;
+  }
+
+  clone(): LABColor {
+    return new LABColor(this);
+  }
+}
+
+export class OKLABColor {
+  constructor(opts: { l: number; a: number; b: number; alpha?: number }) {
+    this.l = opts.l;
+    this.a = opts.a;
+    this.b = opts.b;
+    this.alpha = opts.alpha ?? 1;
+  }
+
+  l: number;
+  a: number;
+  b: number;
+  alpha: number;
+
+  toString(): string {
+    const l = `${Math.round(this.l * 1000) / 10}%`;
+    const a = Math.round(this.a * 1000) / 1000;
+    const b = Math.round(this.b * 1000) / 1000;
+
+    if (this.alpha === 1) {
+      return `oklab(${l} ${a} ${b})`;
+    }
+    return `oklab(${l} ${a} ${b} / ${this.alpha})`;
+  }
+
+  clone(): OKLABColor {
+    return new OKLABColor(this);
+  }
+}
+
+export class LCHColor {
+  constructor(opts: { l: number; c: number; h: number; a?: number }) {
+    this.l = opts.l;
+    this.c = opts.c;
+    this.h = opts.h;
+    this.a = opts.a ?? 1;
+  }
+
+  l: number;
+  c: number;
+  h: number;
+  a: number;
+
+  toString(): string {
+    const l = Math.round(this.l * 10) / 10;
+    const c = Math.round(this.c * 10) / 10;
+    const h = Math.round(this.h * 360 * 100) / 100;
+
+    if (this.a === 1) {
+      return `lch(${l}% ${c} ${h})`;
+    }
+    return `lch(${l}% ${c} ${h} / ${this.a})`;
+  }
+
+  clone(): LCHColor {
+    return new LCHColor(this);
+  }
+}
+
 export class OKLCHColor {
   constructor(opts: { l: number; c: number; h: number; a?: number }) {
     this.l = opts.l;
@@ -112,13 +228,45 @@ export class OKLCHColor {
   }
 }
 
+export class ColorFunction {
+  constructor(opts: { space: string; c1: number; c2: number; c3: number; a?: number }) {
+    this.space = opts.space;
+    this.c1 = opts.c1;
+    this.c2 = opts.c2;
+    this.c3 = opts.c3;
+    this.a = opts.a ?? 1;
+  }
+
+  space: string;
+  c1: number;
+  c2: number;
+  c3: number;
+  a: number;
+
+  toString(): string {
+    if (this.a === 1) {
+      return `color(${this.space} ${this.c1} ${this.c2} ${this.c3})`;
+    }
+    return `color(${this.space} ${this.c1} ${this.c2} ${this.c3} / ${this.a})`;
+  }
+
+  clone(): ColorFunction {
+    return new ColorFunction(this);
+  }
+}
+
 export type Color =
   | HexColor
   | NamedColor
   | CurrentColor
   | RGBColor
   | HSLColor
+  | HWBColor
+  | LABColor
+  | OKLABColor
+  | LCHColor
   | OKLCHColor
+  | ColorFunction
   | MacaronColor;
 
 export const colorNames = [

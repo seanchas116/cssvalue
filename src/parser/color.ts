@@ -5,9 +5,14 @@ import {
   CurrentColor,
   HexColor,
   HSLColor,
+  HWBColor,
+  LABColor,
+  OKLABColor,
+  LCHColor,
+  OKLCHColor,
+  ColorFunction,
   NamedColor,
   RGBColor,
-  OKLCHColor,
 } from "../types/Color";
 import {
   Dimension,
@@ -163,6 +168,128 @@ const oklchSlash = slashColor(
   angleOrNumber,
 ).map(buildOKLCH);
 
+function buildHWB([h, w, b, a]: [
+  Angle | Dimension<"">,
+  Percentage | ZeroDimension,
+  Percentage | ZeroDimension,
+  Percentage | Dimension<""> | undefined,
+]) {
+  return new HWBColor({
+    h: h.unit === "" ? h.value / 360 : angleToTurn(h),
+    w: w.value / 100,
+    b: b.value / 100,
+    a: a != null ? (a.unit === "%" ? a.value / 100 : a.value) : 1,
+  });
+}
+
+const hwbSlash = slashColor(
+  bnb.match(/hwb/i),
+  angleOrNumber,
+  percentage,
+  percentage,
+).map(buildHWB);
+
+const labValue = bnb.choice(
+  percentageOnly,
+  number.map((n) => new Dimension(n, "")),
+).trim(maybeWhitespace);
+
+function buildLAB([l, a, b, alpha]: [
+  Percentage | Dimension<"">,
+  Dimension<""> | Percentage,
+  Dimension<""> | Percentage,
+  Percentage | Dimension<""> | undefined,
+]) {
+  return new LABColor({
+    l: l.unit === "%" ? l.value : l.value,
+    a: a.unit === "%" ? a.value * 1.25 : a.value,
+    b: b.unit === "%" ? b.value * 1.25 : b.value,
+    alpha: alpha != null ? (alpha.unit === "%" ? alpha.value / 100 : alpha.value) : 1,
+  });
+}
+
+const labSlash = slashColor(
+  bnb.match(/lab/i),
+  labValue,
+  labValue,
+  labValue,
+).map(buildLAB);
+
+function buildOKLAB([l, a, b, alpha]: [
+  Percentage | Dimension<"">,
+  Dimension<""> | Percentage,
+  Dimension<""> | Percentage,
+  Percentage | Dimension<""> | undefined,
+]) {
+  return new OKLABColor({
+    l: l.unit === "%" ? l.value / 100 : l.value,
+    a: a.unit === "%" ? a.value * 0.004 : a.value,
+    b: b.unit === "%" ? b.value * 0.004 : b.value,
+    alpha: alpha != null ? (alpha.unit === "%" ? alpha.value / 100 : alpha.value) : 1,
+  });
+}
+
+const oklabSlash = slashColor(
+  bnb.match(/oklab/i),
+  labValue,
+  labValue,
+  labValue,
+).map(buildOKLAB);
+
+function buildLCH([l, c, h, a]: [
+  Percentage | Dimension<"">,
+  Dimension<""> | Percentage,
+  Angle | Dimension<"">,
+  Percentage | Dimension<""> | undefined,
+]) {
+  return new LCHColor({
+    l: l.unit === "%" ? l.value : l.value,
+    c: c.unit === "%" ? c.value * 1.5 : c.value,
+    h: h.unit === "" ? h.value / 360 : angleToTurn(h),
+    a: a != null ? (a.unit === "%" ? a.value / 100 : a.value) : 1,
+  });
+}
+
+const lchSlash = slashColor(
+  bnb.match(/lch/i),
+  labValue,
+  labValue,
+  angleOrNumber,
+).map(buildLCH);
+
+function buildColorFunction([space, c1, c2, c3, a]: [
+  string,
+  Percentage | Dimension<"">,
+  Percentage | Dimension<"">,
+  Percentage | Dimension<"">,
+  Percentage | Dimension<""> | undefined,
+]) {
+  const toValue = (v: Percentage | Dimension<"">) =>
+    v.unit === "%" ? v.value / 100 : v.value;
+
+  return new ColorFunction({
+    space,
+    c1: toValue(c1),
+    c2: toValue(c2),
+    c3: toValue(c3),
+    a: a != null ? toValue(a) : 1,
+  });
+}
+
+const colorSpaceId = bnb.match(/srgb-linear|srgb|display-p3|a98-rgb|prophoto-rgb|rec2020|xyz-d50|xyz-d65|xyz/).trim(maybeWhitespace);
+
+const colorFunctionSlash = bnb
+  .all(
+    colorSpaceId,
+    percentageOrNumber,
+    percentageOrNumber,
+    percentageOrNumber,
+    bnb.choice(bnb.text("/").next(percentageOrNumber), bnb.ok(undefined)),
+  )
+  .wrap(bnb.text("color("), bnb.text(")"))
+  .trim(maybeWhitespace)
+  .map(buildColorFunction);
+
 export const color: bnb.Parser<Color> = bnb.choice(
   hexColor,
   namedColor,
@@ -171,6 +298,11 @@ export const color: bnb.Parser<Color> = bnb.choice(
   rgbSlash,
   hslComma,
   hslSlash,
+  hwbSlash,
+  labSlash,
+  oklabSlash,
+  lchSlash,
   oklchSlash,
+  colorFunctionSlash,
   macaronColor,
 );
