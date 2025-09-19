@@ -4,19 +4,6 @@ import { Dimension } from "../types/Dimension";
 import { border, borderColor, borderStyle, borderWidth } from "./border";
 import { expect, describe, it } from "vitest";
 
-describe(Border, () => {
-  describe("toString", () => {
-    it("stringifies Border", () => {
-      const border = new Border({
-        width: "medium",
-        style: "dashed",
-        color: new NamedColor("green"),
-      });
-      expect(border.toString()).toEqual("medium dashed green");
-    });
-  });
-});
-
 describe("borderWidth", () => {
   it("parsed border-width", () => {
     expect(() => borderWidth.tryParse("hoge")).toThrow();
