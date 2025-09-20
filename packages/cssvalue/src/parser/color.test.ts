@@ -166,6 +166,13 @@ describe("color", () => {
     expect(color.tryParse("oklch(50% 50% 180)")).toEqual(
       new OKLCHColor({ l: 0.5, c: 0.2, h: 180 / 360 }),
     );
+    // Test plain numbers for lightness (0-1 range)
+    expect(color.tryParse("oklch(0.623 0.214 259.815)")).toEqual(
+      new OKLCHColor({ l: 0.623, c: 0.214, h: 259.815 / 360 }),
+    );
+    expect(color.tryParse("oklch(0.488 0.243 264.376)")).toEqual(
+      new OKLCHColor({ l: 0.488, c: 0.243, h: 264.376 / 360 }),
+    );
   });
   it("parses color() function", () => {
     expect(color.tryParse("color(display-p3 1 0.5 0)")).toEqual(

@@ -143,30 +143,23 @@ const hslSlash = slashColor(
 ).map(buildHSL);
 
 function buildOKLCH([l, c, h, a]: [
-  Percentage | ZeroDimension,
+  Percentage | Dimension<"">,
   Dimension<""> | Percentage | ZeroDimension,
   Angle | Dimension<"">,
   Percentage | Dimension<""> | undefined,
 ]) {
   return new OKLCHColor({
-    l: l.value / 100,
+    l: l.unit === "%" ? l.value / 100 : l.value,
     c: c.unit === "%" ? (c.value / 100) * 0.4 : c.value,
     h: h.unit === "" ? h.value / 360 : angleToTurn(h),
     a: a != null ? (a.unit === "%" ? a.value / 100 : a.value) : 1,
   });
 }
 
-const chromaValue = bnb
-  .choice(
-    percentageOnly,
-    number.map((n) => new Dimension(n, "")),
-  )
-  .trim(maybeWhitespace);
-
 const oklchSlash = slashColor(
   bnb.match(/oklch/i),
-  percentage,
-  chromaValue,
+  percentageOrNumber,
+  percentageOrNumber,
   angleOrNumber,
 ).map(buildOKLCH);
 
@@ -191,12 +184,6 @@ const hwbSlash = slashColor(
   percentage,
 ).map(buildHWB);
 
-const labValue = bnb
-  .choice(
-    percentageOnly,
-    number.map((n) => new Dimension(n, "")),
-  )
-  .trim(maybeWhitespace);
 
 function buildLAB([l, a, b, alpha]: [
   Percentage | Dimension<"">,
@@ -219,9 +206,9 @@ function buildLAB([l, a, b, alpha]: [
 
 const labSlash = slashColor(
   bnb.match(/lab/i),
-  labValue,
-  labValue,
-  labValue,
+  percentageOrNumber,
+  percentageOrNumber,
+  percentageOrNumber,
 ).map(buildLAB);
 
 function buildOKLAB([l, a, b, alpha]: [
@@ -245,9 +232,9 @@ function buildOKLAB([l, a, b, alpha]: [
 
 const oklabSlash = slashColor(
   bnb.match(/oklab/i),
-  labValue,
-  labValue,
-  labValue,
+  percentageOrNumber,
+  percentageOrNumber,
+  percentageOrNumber,
 ).map(buildOKLAB);
 
 function buildLCH([l, c, h, a]: [
@@ -266,8 +253,8 @@ function buildLCH([l, c, h, a]: [
 
 const lchSlash = slashColor(
   bnb.match(/lch/i),
-  labValue,
-  labValue,
+  percentageOrNumber,
+  percentageOrNumber,
   angleOrNumber,
 ).map(buildLCH);
 
