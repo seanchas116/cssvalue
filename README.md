@@ -5,6 +5,8 @@
 
 A TypeScript library for parsing and serializing CSS property values with strong typing support.
 
+**[🎨 Try the Interactive Demo →](https://cssvalue.vercel.app/)**
+
 ## Features
 
 - **Parse CSS values** into strongly-typed JavaScript objects
@@ -199,7 +201,7 @@ pnpm --filter @seanchas116/cssvalue build
 
 ### Interactive Demo
 
-Run the interactive demo to test CSS parsing in real-time:
+Try the live demo at **[cssvalue.vercel.app](https://cssvalue.vercel.app/)** or run it locally:
 
 ```bash
 # Start the demo development server
