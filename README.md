@@ -170,6 +170,11 @@ Each CSS value type is represented by a class with a `toString()` method:
 
 This project uses PNPM workspaces and Turbo for monorepo management.
 
+### Prerequisites
+
+- Node.js 18+
+- PNPM 8+
+
 ### Setup
 
 ```bash
@@ -192,12 +197,30 @@ pnpm build
 pnpm --filter @seanchas116/cssvalue build
 ```
 
+### Interactive Demo
+
+Run the interactive demo to test CSS parsing in real-time:
+
+```bash
+# Start the demo development server
+pnpm --filter demo dev
+
+# Open http://localhost:5173 in your browser
+```
+
+The demo provides:
+- Live parsing of CSS values as you type
+- Support for all parser types (background, border, color, gradients, etc.)
+- Pretty-printed output showing the parsed JavaScript objects
+- Instant feedback on parsing errors
+
 ### Project Structure
 
 ```
 .
 ├── packages/
-│   └── cssvalue/        # Main CSS value parsing library
+│   ├── cssvalue/        # Main CSS value parsing library
+│   └── demo/            # Interactive web demo (React + Vite)
 ├── pnpm-workspace.yaml  # PNPM workspace configuration
 ├── turbo.json          # Turbo build configuration
 └── README.md           # This file

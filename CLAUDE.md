@@ -9,6 +9,7 @@ This is a monorepo containing the TypeScript library `@seanchas116/cssvalue` tha
 ## Monorepo Structure
 
 - `/packages/cssvalue/` - The main CSS value parsing library
+- `/packages/demo/` - Interactive web demo for testing CSS value parsing
 - `/pnpm-workspace.yaml` - PNPM workspace configuration
 - `/turbo.json` - Turbo configuration for build orchestration
 
@@ -32,11 +33,23 @@ pnpm build
 
 # Build cssvalue package only
 pnpm --filter @seanchas116/cssvalue build
+
+# Run the demo locally
+pnpm --filter demo dev
 ```
+
+## Demo Application
+
+The demo (`/packages/demo/`) is a React + Vite application that provides an interactive interface for testing the CSS parser:
+
+- **Live parsing** - Shows parse results as you type
+- **Multiple property types** - Quick switching between different CSS properties
+- **Visual feedback** - Success/error states with detailed output
+- **Pretty-printed results** - Uses `pretty-format` for readable object display
 
 ## Architecture
 
-The codebase follows a parser combinator pattern using the `bread-n-butter` library:
+The cssvalue library follows a parser combinator pattern using the `bread-n-butter` library:
 
 1. **`/packages/cssvalue/src/types/`** - TypeScript classes representing CSS value types (Background, Border, Color, Dimension, etc.). Each class has a `toString()` method for serialization back to CSS.
 

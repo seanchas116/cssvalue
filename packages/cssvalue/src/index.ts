@@ -1,3 +1,5 @@
+export { Parser } from "bread-n-butter";
+
 export * as cssParser from "./parser";
 
 export * from "./types/Background";

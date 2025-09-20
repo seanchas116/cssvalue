@@ -12,14 +12,16 @@
   },
   "license": "MIT",
   "author": "Ryohei Ikegami <iofg2100@gmail.com>",
-  "main": "dist/index",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
     "lint": "eslint src",
     "test": "vitest run",
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsup",
     "prepare": "npm run build",
     "format": "prettier --write ."
   },
@@ -33,6 +35,7 @@
     "eslint": "^9.35.0",
     "jest-matcher-deep-close-to": "^3.0.2",
     "prettier": "^3.6.2",
+    "tsup": "^8.3.5",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
