@@ -1,6 +1,6 @@
 {
   "name": "@seanchas116/cssvalue",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A CSS value parser / serializer",
   "homepage": "https://github.com/seanchas116/cssvalue#readme",
   "bugs": {
