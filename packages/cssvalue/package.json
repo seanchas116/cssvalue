@@ -19,6 +19,7 @@
     "dist"
   ],
   "scripts": {
+    "dev": "tsup --watch",
     "lint": "eslint src",
     "test": "vitest run",
     "build": "tsup",
