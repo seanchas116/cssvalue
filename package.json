@@ -1,46 +1,18 @@
 {
-  "name": "@seanchas116/cssvalue",
-  "version": "0.0.3",
-  "description": "A CSS value parser / serializer",
-  "homepage": "https://github.com/seanchas116/cssvalue#readme",
-  "bugs": {
-    "url": "https://github.com/seanchas116/cssvalue/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/seanchas116/cssvalue.git"
-  },
-  "license": "MIT",
-  "author": "Ryohei Ikegami <iofg2100@gmail.com>",
-  "main": "lib/index",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
+  "name": "cssvalue-root",
+  "private": true,
+  "version": "1.0.0",
   "scripts": {
-    "lint": "eslint src",
-    "test": "vitest run",
-    "build": "tsc -p tsconfig.build.json",
-    "prepare": "npm run build",
-    "format": "prettier --write ."
-  },
-  "dependencies": {
-    "bread-n-butter": "^0.6.0",
-    "lodash": "^4.17.21"
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "dev": "turbo run dev",
+    "format": "pnpm prettier --write .",
+    "format:check": "pnpm prettier --check ."
   },
   "devDependencies": {
-    "@tsconfig/recommended": "^1.0.10",
-    "@types/lodash": "^4.17.20",
-    "eslint": "^9.35.0",
-    "jest-matcher-deep-close-to": "^3.0.2",
     "prettier": "^3.6.2",
-    "typescript": "^5.9.2",
-    "vitest": "^3.2.4"
+    "turbo": "^2.5.6"
   },
-  "publishConfig": {
-    "access": "public"
-  }
+  "packageManager": "pnpm@9.15.1"
 }

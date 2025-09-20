@@ -4,31 +4,43 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a TypeScript library (`@seanchas116/cssvalue`) that provides CSS value parsing and serialization. It parses CSS property values (like `background`, `border`, `box-shadow`) into strongly-typed JavaScript objects and can serialize them back to CSS strings.
+This is a monorepo containing the TypeScript library `@seanchas116/cssvalue` that provides CSS value parsing and serialization. It parses CSS property values (like `background`, `border`, `box-shadow`) into strongly-typed JavaScript objects and can serialize them back to CSS strings.
+
+## Monorepo Structure
+
+- `/packages/cssvalue/` - The main CSS value parsing library
+- `/pnpm-workspace.yaml` - PNPM workspace configuration
+- `/turbo.json` - Turbo configuration for build orchestration
 
 ## Development Commands
 
 ```bash
-# Install dependencies
-npm install
+# Install dependencies (using PNPM)
+pnpm install
 
-# Run tests
-npm test
+# Run tests for all packages
+pnpm test
+
+# Run tests for cssvalue package only
+pnpm --filter @seanchas116/cssvalue test
 
 # Run linter
-npm run lint
+pnpm lint
 
-# Build the library (outputs to lib/)
-npm run build
+# Build all packages
+pnpm build
+
+# Build cssvalue package only
+pnpm --filter @seanchas116/cssvalue build
 ```
 
 ## Architecture
 
 The codebase follows a parser combinator pattern using the `bread-n-butter` library:
 
-1. **`/src/types/`** - TypeScript classes representing CSS value types (Background, Border, Color, Dimension, etc.). Each class has a `toString()` method for serialization back to CSS.
+1. **`/packages/cssvalue/src/types/`** - TypeScript classes representing CSS value types (Background, Border, Color, Dimension, etc.). Each class has a `toString()` method for serialization back to CSS.
 
-2. **`/src/parser/`** - Parser implementations using bread-n-butter combinators:
+2. **`/packages/cssvalue/src/parser/`** - Parser implementations using bread-n-butter combinators:
    - `common.ts` contains reusable parser utilities like `doubleBar()` (for CSS `||` syntax) and `doubleAmpersand()` (for CSS `&&` syntax)
    - Each CSS property type has its own parser file (e.g., `background.ts`, `border.ts`)
    - Parsers are exported through `cssParser` object in `index.ts`
@@ -51,10 +63,12 @@ Tests use Vitest and are located alongside source files as `*.test.ts`. Tests ty
 Run a single test file:
 
 ```bash
-npm test -- src/parser/background.test.ts
+pnpm --filter @seanchas116/cssvalue test -- src/parser/background.test.ts
 ```
 
 ## TypeScript Configuration
 
-- Development: `tsconfig.json` (no emit, for IDE)
-- Build: `tsconfig.build.json` (outputs to `/lib` with declarations)
+The cssvalue package has:
+
+- Development: `packages/cssvalue/tsconfig.json` (no emit, for IDE)
+- Build: `packages/cssvalue/tsconfig.build.json` (outputs to `/packages/cssvalue/lib` with declarations)

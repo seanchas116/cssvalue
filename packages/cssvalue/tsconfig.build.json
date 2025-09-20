@@ -1,9 +1,9 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["lib/**/*.d.ts", "**/*.test.ts"],
+  "exclude": ["dist/**/*.d.ts", "**/*.test.ts"],
   "compilerOptions": {
     "noEmit": false,
-    "outDir": "lib",
+    "outDir": "dist",
     "declaration": true,
     "sourceMap": false
   }

@@ -15,8 +15,14 @@ A TypeScript library for parsing and serializing CSS property values with strong
 
 ## Installation
 
+### Using npm/yarn/pnpm
+
 ```bash
 npm install @seanchas116/cssvalue
+# or
+yarn add @seanchas116/cssvalue
+# or
+pnpm add @seanchas116/cssvalue
 ```
 
 ## Supported CSS Properties
@@ -162,18 +168,39 @@ Each CSS value type is represented by a class with a `toString()` method:
 
 ## Development
 
+This project uses PNPM workspaces and Turbo for monorepo management.
+
+### Setup
+
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
-# Run tests
-npm test
+# Run tests for all packages
+pnpm test
+
+# Run tests for a specific package
+pnpm --filter @seanchas116/cssvalue test
 
 # Run linter
-npm run lint
+pnpm lint
 
-# Build the library
-npm run build
+# Build all packages
+pnpm build
+
+# Build a specific package
+pnpm --filter @seanchas116/cssvalue build
+```
+
+### Project Structure
+
+```
+.
+├── packages/
+│   └── cssvalue/        # Main CSS value parsing library
+├── pnpm-workspace.yaml  # PNPM workspace configuration
+├── turbo.json          # Turbo build configuration
+└── README.md           # This file
 ```
 
 ## Contributing
