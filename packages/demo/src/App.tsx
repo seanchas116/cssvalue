@@ -28,7 +28,7 @@ const PROPERTY_NAMES = Object.keys(PROPERTY_EXAMPLES) as PropertyName[];
 
 function App() {
   const [selectedProperty, setSelectedProperty] =
-    useState<PropertyName>("color");
+    useState<PropertyName>("background");
   const [inputValue, setInputValue] = useState<string>(PROPERTY_EXAMPLES.color);
   const [parseResult, setParseResult] = useState<ParseResult>({
     success: false,
