@@ -1,6 +1,6 @@
 {
   "name": "@seanchas116/cssvalue",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A CSS value parser / serializer",
   "homepage": "https://github.com/seanchas116/cssvalue#readme",
   "bugs": {
@@ -16,7 +16,8 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "dev": "tsup --watch",
@@ -24,6 +25,7 @@
     "test": "vitest run",
     "build": "tsup",
     "prepare": "npm run build",
+    "prepublishOnly": "cp ../../README.md ./README.md",
     "format": "prettier --write ."
   },
   "dependencies": {
