@@ -17,8 +17,7 @@ describe(interpolateStops, () => {
 
     const interpolated = interpolateStops(stops);
 
-    // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    // @ts-expect-error - toBeDeepCloseTo is extended from jest-matcher-deep-close-to
     expect(interpolated).toBeDeepCloseTo([
       [new HexColor("#000"), 0],
       [new HexColor("#111"), 0.5],
@@ -42,8 +41,7 @@ describe(interpolateStops, () => {
 
     const interpolated = interpolateStops(stops);
 
-    // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    // @ts-expect-error - toBeDeepCloseTo is extended from jest-matcher-deep-close-to
     expect(interpolated).toBeDeepCloseTo([
       [new HexColor("#000"), 0],
       [new HexColor("#111"), 0.1],
