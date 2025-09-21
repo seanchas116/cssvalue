@@ -99,14 +99,14 @@ const hsl = cssParser.color.tryParse("hsl(210deg 50% 40%)");
 const oklch = cssParser.color.tryParse("oklch(0.7 0.2 150)");
 
 // Create colors programmatically
-const color = new RGBColor(255, 128, 0, 0.5);
-color.toString(); // => "rgb(255 128 0 / 0.5)"
+const color = new RGBColor({ r: 1, g: 0.5, b: 0, a: 0.5 });
+color.toString(); // => "rgba(255,128,0,0.5)"
 ```
 
 ### Working with Gradients
 
 ```ts
-import { cssParser, LinearGradient } from "@seanchas116/cssvalue";
+import { cssParser, LinearGradient, HexColor } from "@seanchas116/cssvalue";
 
 const gradient = cssParser.gradient.tryParse(
   "linear-gradient(45deg, red 0%, blue 50%, green 100%)",
@@ -124,7 +124,7 @@ import {
   cssParser,
   BoxShadow,
   Dimension,
-  HexColor,
+  RGBColor,
 } from "@seanchas116/cssvalue";
 
 const shadows = cssParser.boxShadow.tryParse(
@@ -135,8 +135,8 @@ const shadows = cssParser.boxShadow.tryParse(
 const shadow = new BoxShadow({
   offsetX: new Dimension(0, "px"),
   offsetY: new Dimension(4, "px"),
-  blur: new Dimension(6, "px"),
-  color: new RGBAColor(0, 0, 0, 0.1),
+  blurRadius: new Dimension(6, "px"),
+  color: new RGBColor({ r: 0, g: 0, b: 0, a: 0.1 }),
 });
 ```
 
