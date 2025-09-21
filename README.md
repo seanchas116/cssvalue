@@ -211,6 +211,7 @@ pnpm --filter demo dev
 ```
 
 The demo provides:
+
 - Live parsing of CSS values as you type
 - Support for all parser types (background, border, color, gradients, etc.)
 - Pretty-printed output showing the parsed JavaScript objects

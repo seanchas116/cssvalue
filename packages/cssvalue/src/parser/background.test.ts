@@ -193,7 +193,8 @@ describe("background", () => {
   });
 
   it("parses complex background with oklch colors in gradient", () => {
-    const input = "rgba(0, 0, 0, 0) linear-gradient(to right, oklch(0.623 0.214 259.815) 0%, oklch(0.488 0.243 264.376) 100%) repeat scroll 0% 0% / auto padding-box border-box";
+    const input =
+      "rgba(0, 0, 0, 0) linear-gradient(to right, oklch(0.623 0.214 259.815) 0%, oklch(0.488 0.243 264.376) 100%) repeat scroll 0% 0% / auto padding-box border-box";
     const result = background.tryParse(input);
     expect(result).toBeDefined();
     expect(result?.color?.toString()).toBe("rgba(0,0,0,0)");

@@ -91,33 +91,39 @@ The cssvalue package has:
 To release a new version of `@seanchas116/cssvalue`:
 
 1. **Update the version** in `/packages/cssvalue/package.json`:
+
    ```bash
    # Edit packages/cssvalue/package.json and bump the version number
    ```
 
 2. **Build the package**:
+
    ```bash
    pnpm --filter @seanchas116/cssvalue build
    ```
 
 3. **Run tests** to ensure everything works:
+
    ```bash
    pnpm --filter @seanchas116/cssvalue test
    ```
 
 4. **Publish to npm** (from the cssvalue package directory):
+
    ```bash
    cd packages/cssvalue
    npm publish
    ```
 
 5. **Commit the version bump**:
+
    ```bash
    git add -A
    git commit -m "chore: release vX.X.X"
    ```
 
 6. **Create a git tag** (optional but recommended):
+
    ```bash
    git tag vX.X.X -m "Release version X.X.X"
    ```

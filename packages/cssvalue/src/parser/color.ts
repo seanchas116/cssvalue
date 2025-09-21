@@ -184,7 +184,6 @@ const hwbSlash = slashColor(
   percentage,
 ).map(buildHWB);
 
-
 function buildLAB([l, a, b, alpha]: [
   Percentage | Dimension<"">,
   Dimension<""> | Percentage,
